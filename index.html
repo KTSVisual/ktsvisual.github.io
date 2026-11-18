@@ -134,6 +134,50 @@ html{scroll-padding-top:76px}img,video,iframe{max-width:100%} .card,.frame,.kts-
  #kts-touch-hand,.kts-touch-ripple{display:none!important}
  body::before{display:none!important}
 }
+</style><style id="kts-mobile-reliability">
+html{width:100%;max-width:100%;overflow-x:clip;-webkit-text-size-adjust:100%}
+body{width:100%;max-width:100%;overflow-x:clip}
+@media(max-width:720px){
+  .nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:12px 4%}
+  .logo{font-size:clamp(19px,5vw,24px)}
+  .navlinks{width:100%;justify-content:center;gap:clamp(10px,3vw,25px);flex-wrap:wrap;font-size:11px;letter-spacing:.4px}
+  .navlinks a{padding:7px 3px;min-height:44px;display:inline-flex;align-items:center}
+  .hero{width:100%;min-height:auto;padding:28px 4% 52px}
+  .frame{width:100%;max-width:100%;min-height:340px;padding:42px 12px}
+  .hero h1{font-size:clamp(72px,24vw,145px);line-height:.86;letter-spacing:-.095em;padding-right:.09em;max-width:100%}
+  .hero .visual{font-size:clamp(23px,6.4vw,43px);letter-spacing:clamp(.08em,1vw,.22em);padding-left:0;max-width:100%;overflow-wrap:anywhere}
+  .hero .name{font-size:clamp(19px,5.3vw,30px);overflow-wrap:anywhere}
+  .hero .tag{font-size:clamp(10px,2.8vw,13px);overflow-wrap:anywhere}
+  .hero .sub{max-width:100%;font-size:14px}
+  .container{width:100%;max-width:100%;padding:52px 5%}
+  .heading,.about{min-width:0}
+  h2{font-size:clamp(34px,10vw,58px);overflow-wrap:anywhere}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;overflow:visible}
+  .filter{flex:0 1 auto;min-height:46px;padding:12px 13px;white-space:normal;text-align:center;font-size:12px;letter-spacing:.25px}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+  .card,.details,.cover{min-width:0;max-width:100%}
+  .details{padding:18px}
+  .details button{min-height:44px;display:inline-flex;align-items:center;padding:8px 0}
+  .cover{touch-action:manipulation}
+  .modal{padding:16px 4% 55px;-webkit-overflow-scrolling:touch}
+  .modal-top{gap:10px;align-items:flex-start}
+  .modal h2{font-size:clamp(30px,9vw,48px)}
+  .close{flex-shrink:0;min-width:50px;min-height:48px;padding:10px}
+  .gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .source-links a,.filter,.cover,.details button,.close,.cta,.game-intro button,.game-bottom button,.lb-refresh,.lb-submit button{touch-action:manipulation;-webkit-tap-highlight-color:rgba(237,40,112,.24)}
+  .kts-game{width:100%;min-width:0;overflow:hidden}
+  .game-head,.game-bottom{flex-wrap:wrap}
+  .kts-leaderboard{min-width:0;max-width:100%}
+  .lb-form-row{flex-wrap:wrap}
+  .lb-form-row input{flex:1 1 180px;min-width:0}
+  .lb-form-row button{flex:0 0 auto}
+  .contact{padding:70px 5%}
+  #kts-touch-hand{display:none!important}
+  .kts-touch-warp{transform:none!important}
+  body::before{pointer-events:none!important}
+  .kts-touch-ripple{pointer-events:none!important}
+}
+@media(max-width:360px){.hero h1{font-size:clamp(65px,23vw,84px)}.hero .visual{font-size:clamp(21px,6vw,26px)}.frame{padding:38px 8px}.modal-top{flex-wrap:wrap}}
 </style></head><body><header><nav class="nav"><a class="logo" href="#home">KTS <span>VISUAL</span></a><div class="navlinks"><a href="#work">WORK</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></div></nav></header><main><section class="hero" id="home"><div class="frame"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><h1>KTS</h1><div class="visual">VISUAL</div><div class="name">Kian Taylor-Sanderson</div><div class="tag">DIGITAL &nbsp;•&nbsp; CREATIVE &nbsp;•&nbsp; VISUAL</div><p class="sub">I’m Kian Taylor-Sanderson, a third-year ALT LVDP student exploring live production, interactive experiences and visual storytelling. KTS Visual brings together my university projects, creative experiments and concert photography.</p></div></section><section class="container" id="work"><div class="heading"><div><div class="eyebrow">01 / Portfolio</div><h2>SELECTED <span class="pink">WORK.</span></h2></div><p>A collection of university productions, collaborative work and personal creative projects. Open a project to discover the ideas behind it, see more images and videos, and follow links to the original posts.</p></div><div class="filters" id="filters"></div><div class="grid" id="projects"></div></section><section class="container about" id="about"><div><div class="eyebrow">02 / About me</div><h2>BEHIND THE <span class="pink">VISUAL.</span></h2><p>I'm Kian Taylor-Sanderson, the creative behind KTS Visual and a third-year ALT LVDP student. I enjoy bringing ideas to life through live production, interactive technology, visual design and filmmaking. My portfolio reflects both the projects I've developed during university and the opportunities I've had to collaborate with other creatives.</p><p>My work ranges from coding the interactive <em>ALT Arcade</em> game in Isadora to experimenting with 3D environments in Twinmotion and working behind the scenes on <em>Mistakes in Crimson</em>. I've also supported other university teams, contributing screen mapping to <em>Warp of Life</em>, handwritten set details to <em>The Journey Home</em>, and VP wall operation and backdrop designs to <em>Gearshift</em>. Away from university projects, I enjoy concert photography as a hobby. Whether I'm working independently or as part of a team, I like finding the balance between technical problem-solving and strong visual ideas.</p></div><div class="monogram kts-game" aria-label="KTS mini game: catch the moving KTS logo">
 <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
 <div class="game-head"><span>KTS / MINI GAME</span><span id="game-timer" aria-live="off">20s</span></div>
@@ -331,63 +375,15 @@ window.addEventListener('blur',()=>root.style.setProperty('--cursor-visible','0'
  requestAnimationFrame(frame);
 })();
 </script><script id="kts-touch-interactions">
-/* Touch equivalents of the desktop cursor glow and typography lens. The real finger
-   remains the input; the hand appears briefly above it and never intercepts taps. */
+/* Mobile visual feedback: passive, lightweight, and never blocks native taps. */
 (()=>{
- const touch=matchMedia('(hover:none), (pointer:coarse)');
- const reduced=matchMedia('(prefers-reduced-motion: reduce)');
- if(!touch.matches||reduced.matches)return;
+ if(!matchMedia('(pointer:coarse)').matches||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
  const root=document.body;
- const source=document.querySelector('#kts-photo-hand img');
- // The desktop cursor script is intentionally inactive on touch, so read its
- // embedded cursor assets without duplicating the large image data.
- const cursorScript=document.querySelector('#kts-photo-hand-cursor-js');
- let imageSources={};
- if(cursorScript){
-   const match=cursorScript.textContent.match(/const images=(\{.*?\});/s);
-   if(match){try{imageSources=JSON.parse(match[1])}catch(_){}}
- }
- const hand=document.createElement('div');hand.id='kts-touch-hand';hand.setAttribute('aria-hidden','true');
- const img=document.createElement('img');img.alt='';img.draggable=false;
- img.src=imageSources.default||'';hand.append(img);document.body.append(hand);
- const skip='.kts-game,.kts-leaderboard,nav,footer,button,input,textarea,select,[contenteditable],.zoom,a';
- const candidates=[...document.querySelectorAll('h1,h2,h3,h4,p,.tag,.eyebrow,.name,.visual')]
-   .filter(el=>!el.closest(skip)&&!el.closest('.card')&&!el.closest('.details'));
- const targets=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
- let active=new Set(),frame=0,point=null,pressed=false,hideTimer=0;
- function reset(){for(const el of active){el.style.removeProperty('--touch-warp-x');el.style.removeProperty('--touch-warp-y');el.style.removeProperty('--touch-warp-rotate');el.classList.remove('kts-touch-warp')}active.clear()}
- function draw(){frame=0;if(!point)return;const next=new Set();
-  for(const el of targets){const r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight||r.left>innerWidth||r.right<0)continue;
-   const nx=Math.max(r.left,Math.min(point.x,r.right)),ny=Math.max(r.top,Math.min(point.y,r.bottom));
-   const d=Math.hypot(nx-point.x,ny-point.y);if(d>125)continue;
-   const strength=Math.pow(1-d/125,1.7),cx=(r.left+r.right)/2,cy=(r.top+r.bottom)/2;
-   const dx=cx-point.x,dy=cy-point.y,len=Math.hypot(dx,dy)||1;
-   el.classList.add('kts-touch-warp');el.style.setProperty('--touch-warp-x',(dx/len*5*strength).toFixed(2)+'px');
-   el.style.setProperty('--touch-warp-y',(dy/len*4*strength).toFixed(2)+'px');
-   el.style.setProperty('--touch-warp-rotate',(dx/len*.8*strength).toFixed(2)+'deg');next.add(el);
-  }
-  for(const el of active)if(!next.has(el)){el.classList.remove('kts-touch-warp');el.style.removeProperty('--touch-warp-x');el.style.removeProperty('--touch-warp-y');el.style.removeProperty('--touch-warp-rotate')}
-  active=next;
- }
- function move(e){if(e.pointerType!=='touch'||!e.isPrimary)return;
-  clearTimeout(hideTimer);point={x:e.clientX,y:e.clientY};
-  root.style.setProperty('--cursor-x',point.x+'px');root.style.setProperty('--cursor-y',point.y+'px');
-  root.style.setProperty('--cursor-visible','1');
-  const target=e.target.closest?.('a,button,[role="button"],.cover,.filter,.card');
-  root.style.setProperty('--kts-glow-radius',target?'170px':'135px');
-  root.style.setProperty('--kts-glow-core',target?'.29':'.19');
-  if(img.src){hand.style.transform=`translate3d(${point.x-12}px,${point.y-62}px,0)`;
-   img.src=imageSources[pressed?'down':target?'hover':'default']||img.src;
-   hand.classList.add('kts-visible');}
-  if(!frame)frame=requestAnimationFrame(draw);
- }
- function ripple(e){const r=document.createElement('span');r.className='kts-touch-ripple';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.append(r);r.addEventListener('animationend',()=>r.remove(),{once:true});}
- function finish(){pressed=false;hideTimer=setTimeout(()=>{root.style.setProperty('--cursor-visible','0');hand.classList.remove('kts-visible');point=null;reset()},180)}
- addEventListener('pointerdown',e=>{if(e.pointerType!=='touch'||!e.isPrimary)return;pressed=true;move(e);ripple(e)},{passive:true});
- addEventListener('pointermove',move,{passive:true});
- addEventListener('pointerup',e=>{if(e.pointerType==='touch')finish()},{passive:true});
- addEventListener('pointercancel',e=>{if(e.pointerType==='touch')finish()},{passive:true});
- addEventListener('scroll',()=>{if(!pressed){hand.classList.remove('kts-visible');root.style.setProperty('--cursor-visible','0');reset()}},{passive:true});
- addEventListener('blur',finish);
+ let fade;
+ function glow(x,y,active){root.style.setProperty('--cursor-x',x+'px');root.style.setProperty('--cursor-y',y+'px');root.style.setProperty('--cursor-visible','1');root.style.setProperty('--kts-glow-radius',active?'160px':'115px');root.style.setProperty('--kts-glow-core',active?'.24':'.15');clearTimeout(fade)}
+ function hide(){clearTimeout(fade);fade=setTimeout(()=>root.style.setProperty('--cursor-visible','0'),160)}
+ document.addEventListener('touchstart',e=>{if(e.touches.length!==1)return;const t=e.touches[0];glow(t.clientX,t.clientY,!!e.target.closest('button,a,input,[role="button"]'));},{passive:true});
+ document.addEventListener('touchmove',e=>{if(e.touches.length!==1)return;const t=e.touches[0];glow(t.clientX,t.clientY,false)},{passive:true});
+ document.addEventListener('touchend',hide,{passive:true});document.addEventListener('touchcancel',hide,{passive:true});
 })();
 </script></body></html>
