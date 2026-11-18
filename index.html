@@ -37,6 +37,12 @@ body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;bac
 body>header,body>main,body>section,body>footer{position:relative;z-index:1}
 @media(hover:none),(pointer:coarse){body::before{display:none}}
 @media(prefers-reduced-motion:reduce){body::before{transition:none}}
+
+/* Cursor-driven soft lens warp for typography and project surfaces. */
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .kts-warp-text{--warp-x:0px;--warp-y:0px;--warp-rotate:0deg;--warp-skew:0deg;transform:translate3d(var(--warp-x),var(--warp-y),0) rotate(var(--warp-rotate)) skewX(var(--warp-skew));transition:transform 220ms cubic-bezier(.2,.7,.2,1);will-change:transform;}
+  .kts-warp-surface{--warp-tilt-x:0deg;--warp-tilt-y:0deg;transform:perspective(900px) rotateX(var(--warp-tilt-x)) rotateY(var(--warp-tilt-y));transition:transform 260ms ease;transform-origin:center;}
+}
 </style><script>
 // On refresh, return to the opening KTS Visual section instead of restoring scroll position.
 (function () {
@@ -149,6 +155,43 @@ const root=document.body;
 window.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;root.style.setProperty('--cursor-x',e.clientX+'px');root.style.setProperty('--cursor-y',e.clientY+'px');root.style.setProperty('--cursor-visible','1')},{passive:true});
 document.addEventListener('pointerleave',()=>root.style.setProperty('--cursor-visible','0'));
 window.addEventListener('blur',()=>root.style.setProperty('--cursor-visible','0'));
+})();
+</script>
+
+<script>
+/* Subtle pink-accent cursor lens: nearby words bend away from the pointer.
+   Visual-only transforms do not reflow text or affect the tap game. */
+(()=>{
+  if(!matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)').matches)return;
+  const skip='.kts-game,.kts-leaderboard,nav,footer,button,input,textarea,select,[contenteditable],.zoom';
+  const candidates=[...document.querySelectorAll('h1,h2,h3,h4,p,.tag,.eyebrow,.heading,.project-title,.card-title,.hero-title')]
+    .filter(el=>!el.closest(skip)&&!el.closest('a')&&el.getClientRects().length);
+  // Avoid nested transforms on a title and its inner elements.
+  const targets=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
+  targets.forEach(el=>el.classList.add('kts-warp-text'));
+  let px=-9999,py=-9999,frame=0,active=new Set();
+  function reset(el){el.style.removeProperty('--warp-x');el.style.removeProperty('--warp-y');el.style.removeProperty('--warp-rotate');el.style.removeProperty('--warp-skew')}
+  function draw(){frame=0;const next=new Set();
+    for(const el of targets){
+      const r=el.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth)continue;
+      const x=Math.max(r.left,Math.min(px,r.right)),y=Math.max(r.top,Math.min(py,r.bottom));
+      const dx=x-px,dy=y-py,d=Math.hypot(dx,dy),radius=155;
+      if(d>=radius)continue;
+      const strength=Math.pow(1-d/radius,1.6);
+      const cx=(r.left+r.right)/2,cy=(r.top+r.bottom)/2;
+      const ux=(cx-px)/(Math.hypot(cx-px,cy-py)||1),uy=(cy-py)/(Math.hypot(cx-px,cy-py)||1);
+      el.style.setProperty('--warp-x',(ux*7*strength).toFixed(2)+'px');
+      el.style.setProperty('--warp-y',(uy*5*strength).toFixed(2)+'px');
+      el.style.setProperty('--warp-rotate',(ux*1.2*strength).toFixed(2)+'deg');
+      el.style.setProperty('--warp-skew',(-uy*2.2*strength).toFixed(2)+'deg');
+      next.add(el);
+    }
+    for(const el of active)if(!next.has(el))reset(el);
+    active=next;
+  }
+  addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;px=e.clientX;py=e.clientY;if(!frame)frame=requestAnimationFrame(draw)},{passive:true});
+  function clear(){px=-9999;py=-9999;for(const el of active)reset(el);active.clear()}
+  document.addEventListener('pointerleave',clear);addEventListener('blur',clear);
 })();
 </script>
 </body></html>
