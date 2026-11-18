@@ -66,6 +66,14 @@ body>header,body>main,body>section,body>footer{position:relative;z-index:1}
 }
 @media (hover:none),(pointer:coarse){#kts-photo-hand{display:none!important}}
 @media (prefers-reduced-motion:reduce){#kts-photo-hand{transition:none!important}}
+</style><style id="kts-interactive-glow-v2">
+@media (hover:hover) and (pointer:fine) {
+ body::before{background:radial-gradient(circle var(--kts-glow-radius,260px) at var(--cursor-x,-1000px) var(--cursor-y,-1000px),rgba(237,40,112,var(--kts-glow-core,.20)) 0%,rgba(237,40,112,var(--kts-glow-mid,.085)) 32%,rgba(237,40,112,.015) 64%,transparent 100%);transition:opacity .35s ease;}
+ #kts-click-ripples{position:fixed;inset:0;pointer-events:none;z-index:2147483645;overflow:hidden;}
+ .kts-click-ripple{position:absolute;width:20px;height:20px;border:1.5px solid rgba(255,92,169,.85);border-radius:50%;box-shadow:0 0 16px rgba(237,40,112,.4),inset 0 0 10px rgba(237,40,112,.18);transform:translate(-50%,-50%) scale(.2);animation:kts-click-wave .68s cubic-bezier(.13,.6,.2,1) forwards;}
+ @keyframes kts-click-wave{0%{opacity:.9;transform:translate(-50%,-50%) scale(.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(8)}}
+}
+@media (hover:none),(pointer:coarse),(prefers-reduced-motion:reduce){#kts-click-ripples{display:none!important}}
 </style></head><body><header><nav class="nav"><a class="logo" href="#home">KTS <span>VISUAL</span></a><div class="navlinks"><a href="#work">WORK</a><a href="#about">ABOUT</a><a href="#contact">CONTACT</a></div></nav></header><main><section class="hero" id="home"><div class="frame"><i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i><h1>KTS</h1><div class="visual">VISUAL</div><div class="name">Kian Taylor-Sanderson</div><div class="tag">DIGITAL &nbsp;•&nbsp; CREATIVE &nbsp;•&nbsp; VISUAL</div><p class="sub">Third-year ALT LVDP student exploring live production, visual storytelling and collaborative university projects. I also enjoy concert photography as a hobby.</p></div></section><section class="container" id="work"><div class="heading"><div><div class="eyebrow">01 / Portfolio</div><h2>SELECTED <span class="pink">WORK.</span></h2></div><p>University projects, contributions to other students’ work, and personal photography taken for fun. Explore each project for more images, context and the original Instagram posts.</p></div><div class="filters" id="filters"></div><div class="grid" id="projects"></div></section><section class="container about" id="about"><div><div class="eyebrow">02 / About me</div><h2>BEHIND THE <span class="pink">VISUAL.</span></h2><p>I'm Kian Taylor-Sanderson, a third-year ALT LVDP student and the person behind KTS Visual. My university work spans collaborative studio productions, creative experimentation and filmmaking. I also take photographs at concerts for fun — photography is a personal hobby of mine.</p><p>Alongside my own university work, I've helped other students with their projects, including screen mapping for <em>Warp of Life</em> and handwritten installation details for <em>The Journey Home</em>. Both were university projects by other teams, which I contributed to rather than led. The Journey Home was a team project, not an individual student project. I've also explored the production process through my first short film, <em>Mistakes in Crimson</em>. My Year 2 ALT Arcade project explored interactive tabletop play, and I also helped another university team with their Gearshift event as a VP wall operator and backdrop content creator. Outside university work, I experiment with tools such as Twinmotion and take concert photographs for fun. I enjoy combining technical problem-solving with visual ideas and working alongside other creatives to bring projects to life.</p></div><div class="monogram kts-game" aria-label="KTS mini game: catch the moving KTS logo">
 <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
 <div class="game-head"><span>KTS / MINI GAME</span><span id="game-timer" aria-live="off">20s</span></div>
@@ -231,4 +239,35 @@ window.addEventListener('blur',()=>root.style.setProperty('--cursor-visible','0'
  window.addEventListener('blur',()=>{down=false;drag=false;el.style.opacity='0'});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)el.style.opacity='0'});
  render(null);
-})();</script></body></html>
+})();</script><script id="kts-interactive-glow-script">
+(()=>{
+ const mq=matchMedia('(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
+ if(!mq.matches)return;
+ const root=document.body;
+ let target=0,energy=0,pressed=false,px=-1000,py=-1000,tx=-1000,ty=-1000,active=false;
+ const rippleLayer=document.createElement('div');rippleLayer.id='kts-click-ripples';rippleLayer.setAttribute('aria-hidden','true');document.body.appendChild(rippleLayer);
+ const interactive='a,button,[role="button"],input,select,textarea,summary,label,.project-card,.card,[tabindex]:not([tabindex="-1"])';
+ const frame=t=>{
+  if(!mq.matches){requestAnimationFrame(frame);return;}
+  energy+=(target-energy)*.11;
+  if(active){px+=(tx-px)*.24;py+=(ty-py)*.24;
+   root.style.setProperty('--cursor-x',px+'px');root.style.setProperty('--cursor-y',py+'px');}
+  const breath=(Math.sin(t*.0027)+1)*.5;
+  const radius=245+breath*32+energy*105+(pressed?-28:0);
+  root.style.setProperty('--kts-glow-radius',radius.toFixed(1)+'px');
+  root.style.setProperty('--kts-glow-core',(0.13+breath*.045+energy*.115+(pressed?.085:0)).toFixed(3));
+  root.style.setProperty('--kts-glow-mid',(0.048+breath*.02+energy*.062).toFixed(3));
+  requestAnimationFrame(frame);
+ };
+ window.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;tx=e.clientX;ty=e.clientY;if(!active){px=tx;py=ty;active=true;}target=e.target.closest?.(interactive)?1:0;},{passive:true});
+ window.addEventListener('pointerover',e=>{if(e.pointerType!=='touch')target=e.target.closest?.(interactive)?1:0;},{passive:true});
+ window.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||e.button!==0)return;pressed=true;
+  const r=document.createElement('span');r.className='kts-click-ripple';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';rippleLayer.appendChild(r);r.addEventListener('animationend',()=>r.remove(),{once:true});
+ },{passive:true});
+ window.addEventListener('pointerup',()=>{pressed=false},{passive:true});
+ window.addEventListener('pointercancel',()=>{pressed=false},{passive:true});
+ window.addEventListener('blur',()=>{pressed=false;target=0;active=false},{passive:true});
+ document.addEventListener('pointerleave',()=>{target=0;active=false},{passive:true});
+ requestAnimationFrame(frame);
+})();
+</script></body></html>
