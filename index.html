@@ -31,6 +31,12 @@
 /* Hero accents: keep the intended right-edge stroke, remove stray inward stroke. */
 .hero .frame > .corner.tr { border: 0; border-top: 3px solid var(--pink); border-right: 3px solid var(--pink); }
 .hero .frame > .corner.br { border: 0; border-bottom: 3px solid var(--pink); border-right: 3px solid var(--pink); }
+
+/* Subtle KTS pink cursor glow, behind the page content. */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(480px circle at var(--cursor-x,-1000px) var(--cursor-y,-1000px),rgba(237,40,112,.15),rgba(237,40,112,.055) 34%,transparent 72%);opacity:var(--cursor-visible,0);transition:opacity .28s ease;will-change:opacity}
+body>header,body>main,body>section,body>footer{position:relative;z-index:1}
+@media(hover:none),(pointer:coarse){body::before{display:none}}
+@media(prefers-reduced-motion:reduce){body::before{transition:none}}
 </style><script>
 // On refresh, return to the opening KTS Visual section instead of restoring scroll position.
 (function () {
@@ -135,4 +141,14 @@ const projects=[{"title":"Wasia Project — Live in Leeds","category":"Photograp
  });
  loadLeaderboard();
 })();
-</script></body></html>
+</script>
+<script>
+/* Follow the pointer with a soft, non-interactive accent glow. */
+(()=>{if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+const root=document.body;
+window.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;root.style.setProperty('--cursor-x',e.clientX+'px');root.style.setProperty('--cursor-y',e.clientY+'px');root.style.setProperty('--cursor-visible','1')},{passive:true});
+document.addEventListener('pointerleave',()=>root.style.setProperty('--cursor-visible','0'));
+window.addEventListener('blur',()=>root.style.setProperty('--cursor-visible','0'));
+})();
+</script>
+</body></html>
